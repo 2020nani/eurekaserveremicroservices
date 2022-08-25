@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: mscartoes
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  datasource:
+    hikari:
+      minimum-idle: 1
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+    h2:
+      console:
+        enabled: true
+
+server:
+  port: 0
+  servlet:
+    contextPath: /v1/api/
+
+mq:
+  queues:
+    emisao-cartao: emisao-cartao
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://ms-eurekaserver:teste@localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
